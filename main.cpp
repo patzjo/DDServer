@@ -1,3 +1,10 @@
+/*
+    Should implement
+        - verification to join server.
+        - Some kind of data crypting
+        - mariaDB integration
+*/
+
 #include <iostream>
 
 
