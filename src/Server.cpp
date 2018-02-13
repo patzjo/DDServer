@@ -24,6 +24,7 @@ namespace DDServer
 
     void Server::stopServer()
     {
+        exit(1);
         std::terminate(); // Tape patent till proper messaging system is implemented.
     }
 

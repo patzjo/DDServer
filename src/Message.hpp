@@ -18,7 +18,7 @@ namespace DDServer
     class Messager
     {
     public:
-        void sendMessage( unsigned long long targetID, ServerMessage msg);
+        void sendMessage( ServerMessage msg );
         std::list <ServerMessage> getMessages(unsigned long long targetID);
     
     private:

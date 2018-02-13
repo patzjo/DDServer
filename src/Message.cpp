@@ -2,10 +2,10 @@
 
 namespace DDServer
 {
-    void Messager::sendMessage( unsigned long long targetID, ServerMessage msg)
+    void Messager::sendMessage( ServerMessage msg )
     {
         std::lock_guard<std::mutex> lock(messagerMutex); // Lock from other threads
-        messages[targetID].push_back(msg);
+        messages[msg.targetID].push_back(msg);
     }
 
 

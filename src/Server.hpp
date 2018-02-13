@@ -1,4 +1,5 @@
 #pragma once
+#include "Message.hpp"
 #include "ServerListener.hpp"
 #include "Client.hpp"
 #include "ThreadPool.hpp"
@@ -30,7 +31,7 @@ namespace DDServer
         std::vector <Client> clients;
         Log *log;
         std::vector <std::shared_ptr<DDGame>> games;
-
+        Messenger messages;
         int threadCount = 0;
     };
 }

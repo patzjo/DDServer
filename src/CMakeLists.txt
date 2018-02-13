@@ -1,12 +1,13 @@
 set(NEEDED_FILES
-    ServerListener.cpp
-    Client.cpp
-    Server.cpp
-    Message.cpp
-    Log.cpp
-    Game.cpp
     Account.cpp
+    Client.cpp
     Communication.cpp
+    Game.cpp
+    Log.cpp
+    Lobby.cpp
+    Message.cpp
+    Server.cpp
+    ServerListener.cpp
 )
 
 add_library(Src ${NEEDED_FILES})
