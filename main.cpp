@@ -22,7 +22,9 @@ int main( int argc, char **argv )
     std::cout << "Starting server." << std::endl;
     server.setLog(&serverLog);
     server.startListening();
-    
+
     std::cin.get();
+    server.stopServer();
+    std::cout << "Why no stop ?" << std::endl;
     return 0;
 }

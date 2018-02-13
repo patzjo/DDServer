@@ -5,6 +5,8 @@ set(NEEDED_FILES
     Message.cpp
     Log.cpp
     Game.cpp
+    Account.cpp
+    Communication.cpp
 )
 
 add_library(Src ${NEEDED_FILES})

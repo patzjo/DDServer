@@ -59,14 +59,14 @@ namespace DDServer
                 log->push("Cant accept client!");
             }
  
-            std::string wholeString = "Client ";
+            std::string completeString = "Client ";
             inet_ntop(AF_INET, &(clientAddress.sin_addr), str, INET_ADDRSTRLEN);
-            wholeString += str;
-            wholeString += " has been succesfully connected!";
-            std::cout << wholeString << std::endl;
-            log->push(wholeString);
+            completeString += str;
+            completeString += " has been succesfully connected!";
+            std::cout << completeString << std::endl;
+            log->push(completeString);
             
-            // TODO(Jonne): Send to the lobby
+            // TODO(Jonne): Send to the lobby 
         }
     }
 

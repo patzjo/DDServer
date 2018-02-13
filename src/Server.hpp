@@ -15,14 +15,15 @@ namespace DDServer
     public:
         Server() { threads.resize(10); }
      
-        Server(int portNum, int ThreadCount) { listener.setPort(portNum); threads.resize(ThreadCount); threadCount = ThreadCount; }
+        Server(int portNum, int ThreadCount);
         ~Server() {}
 
         bool startListening();
 
         void setLog( Log *logClass ) { log = logClass; }
         void startServer();
-        
+        void stopServer();
+
     private:
         ServerListener listener;
         ctpl::ThreadPool threads;
