@@ -14,6 +14,7 @@ namespace DDServer
     {
     public:
         std::vector <std::string> getNetData();
+        bool ping();
     private:
         int socketID;                           // Which socket this client have
         struct sockaddr_in clientAddress;       // ClientAddress, ip
