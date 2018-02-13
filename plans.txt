@@ -1,0 +1,10 @@
+Login server                (not prio)
+    Should check account informatino and deside if eligible to enter game (bans/etc)
+    Should send server and client same key to let server just check that key matches.
+
+Should secure data transfer (not prio)
+    Should use good encrypting algorithm in data traffic, so password arent so visible.
+
+Data serialization?         (not prio)
+    Some sort of ready library for data serialization, or maybe trying to make own?
+
