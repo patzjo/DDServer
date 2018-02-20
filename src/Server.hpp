@@ -1,10 +1,10 @@
 #pragma once
-#include "Message.hpp"
 #include "ServerListener.hpp"
 #include "Client.hpp"
 #include "ThreadPool.hpp"
 #include "Log.hpp"
 #include "Game.hpp"
+#include "Message.hpp"
 
 #include <memory>
 
@@ -28,10 +28,12 @@ namespace DDServer
     private:
         ServerListener listener;
         ctpl::ThreadPool threads;
-        std::vector <Client> clients;
         Log *log;
-        std::vector <std::shared_ptr<DDGame>> games;
         Messenger messages;
+
+        std::vector <Client> clients;
+        std::vector <std::shared_ptr<DDGame>> games;
+
         int threadCount = 0;
     };
 }
