@@ -45,7 +45,7 @@ bool processCommand(std::string cmd)
 
 int main( int argc, char **argv )
 {
-    DDServer::Server server(550, 100);
+    DDServer::Server server(5550, 100);
     DDServer::Log serverLog("server.log");
 
     std::cout << "Starting server." << std::endl;

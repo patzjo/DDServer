@@ -29,7 +29,7 @@ namespace DDServer
         ServerListener listener;
         ctpl::ThreadPool threads;
         Log *log;
-        Messenger messages;
+        Messager messages;
 
         std::vector <Client> clients;
         std::vector <std::shared_ptr<DDGame>> games;
