@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 
 #include "Client.hpp"
 #include "ClientDriver.hpp"
@@ -38,35 +39,50 @@ void Client::getMessages()
 
 void Client::run()
 {
+    threadID = std::this_thread::get_id();
     if (!establishConnection())
     {
         std::cerr << "\n: Cant Connect!" << std::endl;
-        return;
     }
-    
-    bool done = false;
-    while(!done)
+    else
     {
-        getMessages();
-        while(!messages.empty())
+        bool done = false;
+        while(!done)
         {
-            std::cout << "Client ID: " << clientID << "Received:\n\t" << messages.front() << std::endl;
-            
-            if ( messages.front() == "shutdown")
+            getMessages();
+            while(!messages.empty())
             {
-                done = true;
-                break;
+                std::string msg = messages.front();
+                std::cout << "\nClient ID: " << clientID << " Received:\n\t'" << msg << "'"<< std::endl;
+                
+                if ( msg == "shutdown")
+                {
+                    done = true;
+                    break;
+                }
+
+                if ( msg == "showID")
+                {
+                    std::stringstream ss;
+                    ss << threadID;
+                    std::string str = "showIDReply ";
+                    str += ss.str();
+                    driver->sendMessage(0, str);
+                }
+
+                messages.pop();
             }
 
-            
-
-            messages.pop();
+            sleep(1);
         }
-
-        sleep(1);
     }
-
-    std::cout << "Shuttingdown: " << clientID << std::endl;
+/*
+    std::stringstream ss;
+    ss << "remove " << clientID << " " << threadID << std::endl;
+    
+    driver->sendMessage(0, ss.str());
+*/
+    driver->queToRemove(clientID, threadID);
 }
 
 bool Client::establishConnection()
@@ -92,4 +108,5 @@ bool Client::establishConnection()
         return false;
     }
 
+    return true;
 }

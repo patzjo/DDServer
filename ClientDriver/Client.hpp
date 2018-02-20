@@ -2,6 +2,7 @@
 
 #include <string>
 #include <queue>
+#include <thread>
 
 #include <unistd.h>
 #include <sys/socket.h>
@@ -16,8 +17,12 @@ public:
     
     void run();
     void getMessages();
+    int getID() { return clientID; }
+
 private:
+    friend class ClientDriver;
     int clientID = 0;
+    std::thread::id threadID;
     bool establishConnection();
 
     struct sockaddr_in address = {0};
