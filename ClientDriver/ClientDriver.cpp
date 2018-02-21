@@ -22,11 +22,10 @@ std::queue <std::string>ClientDriver::deliverMessages(int id)
 
 void ClientDriver::launchClient(std::string ip, int port)
 {
-    std::unique_ptr<Client> newClient = std::make_unique<Client>(this, nextID++, ip, port);
-//    Client *newClient = new Client(this, nextID++, ip, port);
-    
-    threads.push_back(std::thread([&]() { newClient->run(); }));
-    clients.push_back(std::move(newClient));
+    std::shared_ptr<Client> newClient = std::make_shared<Client>(this, nextID++, ip, port);
+
+    threads.push_back(std::thread(&Client::run, newClient));
+    clients.emplace_back(newClient);
 }
 
 void ClientDriver::joinAll()
@@ -73,7 +72,7 @@ void ClientDriver::showClients()
 {
     for ( auto &c : clients)
     {
-        std::cout << "ID #" << c->getID() << ": " << c->threadID << std::endl;
+        std::cout << "ID #" << c->getID() << ": " << c->tID << std::endl;
     }
 }
 

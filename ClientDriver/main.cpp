@@ -61,7 +61,7 @@ int main( int argc, char **argv )
             if (tokens[0] == "createClient")
             {
                 std::cout << "\tLaunching new Client!" << std::endl;
-                myClientDriver.launchClient("localhost", 5550);
+                myClientDriver.launchClient(argv[1], std::atoi(argv[2]));
             }
 
             if (tokens[0] == "list")

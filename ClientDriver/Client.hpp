@@ -3,6 +3,7 @@
 #include <string>
 #include <queue>
 #include <thread>
+#include <mutex>
 
 #include <unistd.h>
 #include <sys/socket.h>
@@ -22,8 +23,8 @@ public:
 private:
     friend class ClientDriver;
     int clientID = 0;
-    std::thread::id threadID;
     bool establishConnection();
+    std::thread::id tID = {};
 
     struct sockaddr_in address = {0};
     int sock = 0, valread;

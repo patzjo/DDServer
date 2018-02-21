@@ -27,7 +27,8 @@ public:
 
 private:
     void removeClient(int id, std::thread::id tID);
-    std::vector <std::unique_ptr<Client>> clients;
+    
+    std::vector <std::shared_ptr<Client>> clients;
     std::vector <std::thread> threads;
     std::map    <int, std::queue <std::string>> messages;
     std::queue <std::tuple<int, std::thread::id>> removeList;

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <sstream>
+#include <chrono>
 
 #include "Client.hpp"
 #include "ClientDriver.hpp"
@@ -39,7 +40,11 @@ void Client::getMessages()
 
 void Client::run()
 {
-    threadID = std::this_thread::get_id();
+    std::thread::id threadID = std::this_thread::get_id();
+    
+    this->tID = threadID;
+    
+        
     if (!establishConnection())
     {
         std::cerr << "\n: Cant Connect!" << std::endl;
@@ -73,7 +78,9 @@ void Client::run()
                 messages.pop();
             }
 
-            sleep(1);
+            //sleep(1);
+            using namespace std::chrono_literals;
+            std::this_thread::sleep_for(5ms);
         }
     }
 /*
@@ -98,7 +105,7 @@ bool Client::establishConnection()
 
     if(inet_pton(AF_INET, ip.c_str(), &serv_addr.sin_addr) <= 0)
     {
-        std::cerr << "\nInvalid address." << std::endl;
+        std::cerr << "\nInvalid address. " << ip.c_str() << std::endl;
         return false;
     }
 
