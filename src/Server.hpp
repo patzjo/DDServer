@@ -4,7 +4,7 @@
 #include "ThreadPool.hpp"
 #include "Log.hpp"
 #include "Game.hpp"
-#include "Message.hpp"
+#include "Messager.hpp"
 
 #include <memory>
 
@@ -28,7 +28,7 @@ namespace DDServer
     private:
         ServerListener listener;
         ctpl::ThreadPool threads;
-        Log *log;
+        Log *log = nullptr;
         Messager messages;
 
         std::vector <Client> clients;

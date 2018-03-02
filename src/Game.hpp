@@ -1,3 +1,8 @@
+/*
+    Actual game running in threads.
+*/
+
+
 #pragma once
 #include <string>
 #include <vector>
@@ -46,6 +51,7 @@ enum ESERVER_STATUS {WAITING, ACTIVE, WAITING_USER};
         bool waiting = true;
 
         ESERVER_STATUS status;
+        class Messager *messager; // Pointer to used messaging system
     };
 
 //    void threadRunner(int id, const DDGame& game);

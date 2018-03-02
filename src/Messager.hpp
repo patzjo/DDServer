@@ -8,6 +8,7 @@
 namespace DDServer
 {
 
+    // Using struct now, so i can easily change it to reflect all data i need.
     struct ServerMessage
     {
         unsigned long long targetID;
@@ -18,8 +19,10 @@ namespace DDServer
     class Messager
     {
     public:
+
         void sendMessage( ServerMessage msg );
-        std::list <ServerMessage> getMessages(unsigned long long targetID);
+        void sendMessage( unsigned long long targetID, std::string msg, Client *from);
+        std::list <ServerMessage> getMessages(unsigned long long targetID); // Request all messages of targetID
     
     private:
         std::map <unsigned long long, std::list <ServerMessage>>messages;

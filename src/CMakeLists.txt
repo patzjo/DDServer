@@ -5,7 +5,7 @@ set(NEEDED_FILES
     Game.cpp
     Log.cpp
     Lobby.cpp
-    Message.cpp
+    Messager.cpp
     Server.cpp
     ServerListener.cpp
 )

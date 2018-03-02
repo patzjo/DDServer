@@ -1,4 +1,4 @@
-#include "Message.hpp"
+#include "Messager.hpp"
 
 namespace DDServer
 {
@@ -6,6 +6,13 @@ namespace DDServer
     {
         std::lock_guard<std::mutex> lock(messagerMutex); // Lock from other threads
         messages[msg.targetID].push_back(msg);
+    }
+
+    void Messager::sendMessage( unsigned long long to, std::string msg, Client *from)
+    {
+        std::lock_guard<std::mutex> lock(messagerMutex); // Lock from other threads
+        ServerMessage message {to, msg, from};
+        messages[to].push_back(message);
     }
 
 
