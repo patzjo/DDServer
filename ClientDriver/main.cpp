@@ -3,6 +3,7 @@
 #include <string>
 #include <sstream>
 
+#include "Utils.hpp"
 #include "Client.hpp"
 #include "ClientDriver.hpp"
 
@@ -11,20 +12,6 @@ void showUsage()
     std::cout << "\nHelp\n\n\texit\t\tExits program" << std::endl;
     std::cout << "\n\tcreateClient\t\tAdd client" << std::endl;
     std::cout << "\tlist\t\tShow all clients" << std::endl;
-}
-
-std::vector <std::string> tokenize(std::string buffer)
-{
-    std::vector <std::string> result;
-    std::stringstream ss;
-      std::string buf;
-
-    ss << buffer;
-
-    while(std::getline(ss, buf, ' '))
-        result.push_back(buf);
-
-    return result;
 }
 
 int main( int argc, char **argv )
@@ -58,7 +45,7 @@ int main( int argc, char **argv )
             if ( tokens[0] == "help")
                 showUsage();
 
-            if (tokens[0] == "createClient")
+            if (tokens[0] == "createClient" || tokens[0] == "cc")
             {
                 std::cout << "\tLaunching new Client!" << std::endl;
                 myClientDriver.launchClient(argv[1], std::atoi(argv[2]));

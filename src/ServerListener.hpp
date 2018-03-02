@@ -20,7 +20,19 @@ namespace DDServer
     class ServerListener
     {
         public:
-            ServerListener() : portNum(550), maxQueue(5) { }
+            ServerListener() : portNum(5550), maxQueue(5), maxConnections(30)
+            { 
+                allSockets = new int[maxConnections];
+                if ( allSockets == nullptr )
+                {
+                    log->push("Can't reserve memory for sockets.");
+                    exit(EXIT_FAILURE); // TODO(jonne): Should create exit that shutdowns all in nice way
+                }
+
+                for(int c = 0; c < maxConnections; c++)
+                    allSockets[c] = 0;  // Reset sockets to zero
+               
+            }
             ServerListener(int PortNum, int MaxQueue = 10, int MaxConnections = 30);
             ~ServerListener() {
                 close(masterSocket);

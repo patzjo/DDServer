@@ -1,9 +1,11 @@
 #include <iostream>
 #include <sstream>
 #include <chrono>
+#include <cstring>
 
 #include "Client.hpp"
 #include "ClientDriver.hpp"
+#include "Utils.hpp"
 
 Client::Client(ClientDriver *drv, int ID, std::string IP, int PORT)
 {
@@ -40,6 +42,7 @@ void Client::getMessages()
 
 void Client::run()
 {
+    char buffer[1024];
     std::thread::id threadID = std::this_thread::get_id();
     
     this->tID = threadID;
@@ -58,9 +61,9 @@ void Client::run()
             while(!messages.empty())
             {
                 std::string msg = messages.front();
-                std::cout << "\nClient ID: " << clientID << " Received:\n\t'" << msg << "'"<< std::endl;
-                
-                if ( msg == "shutdown")
+                //std::cout << "\nClient ID: " << clientID << " Received:\n\t'" << msg << "'"<< std::endl;
+                std::vector <std::string> command = tokenize(msg);
+                if ( command[0] == "shutdown")
                 {
                     done = true;
                     break;
@@ -73,6 +76,26 @@ void Client::run()
                     std::string str = "showIDReply ";
                     str += ss.str();
                     driver->sendMessage(0, str);
+                }
+
+                if (command[0] == "push")
+                {
+                    std::stringstream ss;
+                    for (unsigned int c = 1; c < command.size(); c++ )
+                    {
+                        ss << command[c] << " ";
+                    }
+                    
+                    std::string str = ss.str();
+                    str.pop_back(); // Remove that last space
+
+                    for ( unsigned int c = 0; c < str.length() && c < 1024; c++)
+                    {
+                        buffer[c] = str[c];
+                    }
+                    buffer[str.length()] = '\0';
+                    size_t bytesSend = send(sock, buffer, strlen(buffer), 0);
+                    std::cout << "\n\tSended to " << sock << " buffer: '" << buffer << "'. " << bytesSend << " bytes send." << std::endl;;
                 }
 
                 messages.pop();
