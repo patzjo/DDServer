@@ -23,7 +23,7 @@ namespace DDServer
             ServerListener() : portNum(550), maxQueue(5) { }
             ServerListener(int PortNum, int MaxQueue = 10) : portNum(PortNum), maxQueue(MaxQueue) { }    
             ~ServerListener() {
-                close(sockfd);
+                close(masterSocket);
             }
             void start();
             void setPort(int num) {portNum=num;}
@@ -31,7 +31,7 @@ namespace DDServer
             void setLog(Log *logClass);
             void setThreads(ctpl::ThreadPool *myThreads) { threads = myThreads; }
         private:
-            int sockfd, portNum, newSocket, maxQueue;
+            int masterSocket, portNum, clientSocket, maxQueue;
             socklen_t len;
             struct sockaddr_in serverAddress, clientAddress;
 

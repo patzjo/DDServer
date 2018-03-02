@@ -15,6 +15,7 @@ namespace DDServer
             void getMessages();                     // Get all messages to this client
             std::string accountName;                // Account name
             unsigned long long playerID;            // GUID string for user account ( unique )
+            class Messager *messager;               // 
     };
 
 }

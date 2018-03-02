@@ -1,3 +1,8 @@
+/*
+    Place where all players are going after connect.
+    Checking here which opponent should player get.
+*/
+
 #pragma once
 #include <queue>
 #include "Client.hpp"
