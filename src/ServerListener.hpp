@@ -21,7 +21,7 @@ namespace DDServer
     {
         public:
             ServerListener() : portNum(550), maxQueue(5) { }
-            ServerListener(int PortNum, int MaxQueue = 10) : portNum(PortNum), maxQueue(MaxQueue) { }    
+            ServerListener(int PortNum, int MaxQueue = 10, int MaxConnections = 30);
             ~ServerListener() {
                 close(masterSocket);
             }
@@ -31,13 +31,13 @@ namespace DDServer
             void setLog(Log *logClass);
             void setThreads(ctpl::ThreadPool *myThreads) { threads = myThreads; }
         private:
-            int masterSocket, portNum, clientSocket, maxQueue;
+            int masterSocket, portNum, clientSocket, maxQueue, maxConnections;
             socklen_t len;
             struct sockaddr_in serverAddress, clientAddress;
-
-            ctpl::ThreadPool *threads;
-
-            Log *log;
+            ctpl::ThreadPool *threads = nullptr;
+            
+            int *allSockets = nullptr;
+            Log *log        = nullptr;
             
     };
 

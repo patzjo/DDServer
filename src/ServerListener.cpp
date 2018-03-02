@@ -8,6 +8,20 @@
 
 namespace DDServer
 {
+    ServerListener::ServerListener(int PortNum, int MaxQueue, int MaxConnections) : portNum(PortNum), maxQueue(MaxQueue), maxConnections(MaxConnections) 
+    {
+        allSockets = new int[maxConnections];
+        if ( allSockets == nullptr )
+        {
+            log->push("Can't reserve memory for sockets.");
+            exit(EXIT_FAILURE);
+        }
+
+        for(int c = 0; c < maxConnections; c++)
+            allSockets[c] = 0;  // Reset sockets to zero
+    }    
+
+
     void ServerListener::setLog(Log *logClass) 
     { 
         log = logClass; 
@@ -45,7 +59,7 @@ namespace DDServer
         {
             std::cerr << "CRITICAL: Threads not initialized!" << std::endl;
             log->push("CRITICAL: Threads not initialized!");
-            exit(1);
+            exit(EXIT_FAILURE);
         }
 
         // We should create some sort of authenticator server, but keeping this simple now
@@ -69,8 +83,10 @@ namespace DDServer
             std::cout << completeString << std::endl;
             log->push(completeString);
             
-            // TODO(Jonne): Send to the lobby d
-        }
+            // TODO(Jonne): Send client to the lobby
+            
+            
+       }
     }
 
 }
