@@ -15,7 +15,7 @@ namespace DDServer
         if ( allSockets == nullptr )
         {
             log->push("Can't reserve memory for sockets.");
-            exit(EXIT_FAILURE); // TODO(jonne): Should create exit that shutdowns all in nice way
+            exit(EXIT_FAILURE); // TODO(jonne): Should create exit that shutdowns all in a nice way
         }
 
         for(int c = 0; c < maxConnections; c++)
@@ -34,7 +34,7 @@ namespace DDServer
         masterSocket = socket(AF_INET, SOCK_STREAM, 0);
         if ( masterSocket < 0 )
         {
-            std::cerr << "Error opening socket!" << std::endl;
+//            std::cerr << "Error opening socket!" << std::endl;
             log->push("ERROR: Unable to open socket!");
         }
         bzero((char *) &serverAddress, sizeof(serverAddress));
@@ -46,7 +46,7 @@ namespace DDServer
         log->push("TRYING: Binding socket.");
         if (bind(masterSocket, (struct sockaddr *) &serverAddress, sizeof(serverAddress)) < 0)
         {
-            std::cerr << "Error on binding!" << std::endl;
+//            std::cerr << "Error on binding!" << std::endl;
             log->push("ERROR: Unable to bind socket!");
             return;
         }
@@ -58,7 +58,7 @@ namespace DDServer
         
         if ( threads == nullptr )
         {
-            std::cerr << "CRITICAL: Threads not initialized!" << std::endl;
+//            std::cerr << "CRITICAL: Threads not initialized!" << std::endl;
             log->push("CRITICAL: Threads not initialized!");
             exit(EXIT_FAILURE);
         }
